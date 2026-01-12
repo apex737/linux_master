@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "def.h"
 
 struct person {
     char name[20];
@@ -7,7 +7,7 @@ struct person {
 
 int write_to_file()
 {
-    FILE *fp = fopen("write_bin", "w"); 
+    FILE *fp = fopen("file2.dat", "w"); 
     if(fp == NULL)
     {
         perror("fopen failed");
@@ -43,7 +43,7 @@ err:
 
 int read_file()
 {
-    FILE *fp = fopen("write_bin", "r"); 
+    FILE *fp = fopen("file2.dat", "r"); 
     if(fp == NULL)
     {
         perror("fopen failed");
@@ -62,7 +62,7 @@ int read_file()
 
 int main()
 {
-
+    // Try hexdump file2.dat
     write_to_file();
     read_file();
     

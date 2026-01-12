@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include "def.h"
+
+// Practice API:  open, close, write, read, fdopen
 
 typedef struct person {
   char name[20];
@@ -12,7 +11,7 @@ int write_info(Person p[2])
 {
   int fd;
   ssize_t ret;
-  fd = open("file",  O_WRONLY | O_TRUNC | O_CREAT, 0644);
+  fd = open("file4.dat",  O_WRONLY | O_TRUNC | O_CREAT, 0644);
   for (int i =0; i < 2; i++)
   {
     ret = write(fd, &p[i], sizeof(Person));
@@ -33,7 +32,7 @@ int write_info(Person p[2])
 
 void read_info()
 {
-  int fd = open("file",  O_RDONLY);
+  int fd = open("file4.dat",  O_RDONLY);
   if(fd == -1) return;
   // Read sizeof(Person) starting from p
   // Increase Offset in each Loop
@@ -59,7 +58,7 @@ void read_info()
 // [문제의 함수] 
 void read_info_overwrite(Person p[]) // p는 배열의 시작 주소(예: 100번지)로 고정됨
 {
-  int fd = open("file", O_RDONLY);
+  int fd = open("file4.dat", O_RDONLY);
   if (fd == -1) return;
 
   while (read(fd, p, sizeof(Person)) > 0) 
@@ -84,6 +83,8 @@ int main()
   read_info();
   printf("p[0] name: %s, age: %d | p[1] name: %s, age: %d\n"
     , p[0].name, p[0].age, p[1].name, p[1].age);
+
+  // Try hexdump file4.dat
   return 0;
 }
 

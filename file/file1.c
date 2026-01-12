@@ -1,10 +1,9 @@
-#include <stdio.h>
-#include <string.h>
+#include "def.h"
 
 const char* str = "fseek() 100\n";
 int write_file(void)
 {
-	FILE* fp = fopen("file1", "w");
+	FILE* fp = fopen("file1.dat", "w");
 	if(fp == NULL){
 		perror("fopen failed");
 		return -1;
@@ -20,7 +19,7 @@ int write_file(void)
 
 int read_file(void)
 {
-	FILE* fp = fopen("file1", "r+");
+	FILE* fp = fopen("file1.dat", "r+");
 	if(fp == NULL){
 		perror("fopen failed");
 		return -1;
