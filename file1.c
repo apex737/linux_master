@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <string.h>
 
+const char* str = "fseek() 100\n";
 int write_file(void)
 {
-	FILE* fp = fopen("hi", "w");
+	FILE* fp = fopen("file1", "w");
 	if(fp == NULL){
 		perror("fopen failed");
 		return -1;
@@ -10,21 +12,24 @@ int write_file(void)
 	fputs("Hello World\n", fp);
 	fprintf(fp,"fpos is at %ld\n", ftell(fp));
 	fclose(fp);
+
+    // zu: size_t, zd: ssize_t
+    printf("%zu\n", strlen(str));
 	return 0;
 }
 
 int read_file(void)
 {
-	FILE* fp = fopen("hi", "r+");
+	FILE* fp = fopen("file1", "r+");
 	if(fp == NULL){
 		perror("fopen failed");
 		return -1;
 	}
+    fseek(fp, 0, SEEK_END); // set fp to tail
 	fputs("Hello World\n", fp);
-	fprintf(fp,"fpos is at %ld\n", ftell(fp));
-	fprintf(fp, "%ld\n", ftell(fp));
-	printf("%d\n", fseek(fp, 12, SEEK_SET));
-	fprintf(fp, "fseek() %d\n", 100);
+    fseek(fp, -12, SEEK_END);
+
+	fputs(str ,fp);
 	fclose(fp);
 	return 0;
 
