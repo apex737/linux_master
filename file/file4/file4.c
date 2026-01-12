@@ -36,6 +36,7 @@ void read_info()
   int fd = open("file",  O_RDONLY);
   if(fd == -1) return;
   // Read sizeof(Person) starting from p
+  // Increase Offset in each Loop
   Person p;
   while(read(fd, &p, sizeof(Person)) > 0)
   {
