@@ -18,6 +18,6 @@ all: $(PROGS)
 
 # 5. 청소 규칙 (이전 요청하신 find 명령 적용)
 clean:
-	find . -maxdepth 1 -type f ! -name "*.c" ! -name "Makefile" -delete
+	find . -maxdepth 1 ! -type d ! -name "*.c" ! -name "Makefile" ! -name "*.h" -delete
 
 .PHONY: all clean
