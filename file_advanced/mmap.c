@@ -53,7 +53,7 @@ static int read_info_mmap(void)
     }
     //  void *mmap(void addr[.length], size_t length, int prot, 
             // int flags, int fd, off_t offset);
-    // Define stride using casting
+    // Define the pointer stride 
     Person* p = (Person*) mmap(NULL, st.st_size, PROT_READ, MAP_SHARED, fd, 0);
     if(p == MAP_FAILED)
     {
