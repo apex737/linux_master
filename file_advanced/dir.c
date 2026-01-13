@@ -1,6 +1,7 @@
 #include "def.h"
 #include <dirent.h>
 #include <sys/types.h>
+#include <errno.h>
 
 // MACRO Method 
 #define TYPE2STR(X)\
@@ -36,17 +37,21 @@ int main()
     // open current directory
     DIR* dp = opendir(".");
     // define current entry ptr 
-    struct dirent* pEntry = NULL; 
+    struct dirent* pEntry = readdir(dp); 
     // loop internal dir until meet an EOF 
     // Issue: NULL can be an EOF or Unaccessable file
-    while(pEntry = readdir(dp))
+    while(pEntry)
     {
       printf("type: %s , name: %s\n",
         TYPE2STR(pEntry->d_type), pEntry->d_name);
       // move to next fp
-      
+      pEntry = readdir(dp);
     }
 
+    if(errno != 0){
+        printf("errno: %d (%s)", errno, strerror(errno));
+        return -1;
+    }
     closedir(dp);
     
     return 0;
