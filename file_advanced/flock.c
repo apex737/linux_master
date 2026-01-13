@@ -26,7 +26,7 @@ int main(int argc, const char** argv)
     }
 
     puts("Trying to get the Lock");
-    if(flock(fd, option) == -1)
+    if(flock(fd, option | LOCK_NB) == -1)
     {
         puts("flock() failed");
         printf("option: %d, errno: %d (%s)\n", option, errno, strerror(errno));
@@ -34,6 +34,7 @@ int main(int argc, const char** argv)
     }
     puts("Grabbed the Lock");
     getchar();
+    flock(fd, LOCK_UN);
     puts("Released the Lock");
     close(fd);
 
