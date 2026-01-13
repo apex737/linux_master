@@ -26,16 +26,15 @@ int main(int argc, const char** argv)
     }
 
     puts("Trying to get the Lock");
-    
     if(flock(fd, option) == -1)
     {
         puts("flock() failed");
         printf("option: %d, errno: %d (%s)\n", option, errno, strerror(errno));
         goto err;
     }
-    getchar();
     puts("Grabbed the Lock");
-
+    getchar();
+    puts("Released the Lock");
     close(fd);
 
     return 0;
