@@ -19,15 +19,15 @@ static inline const char* type_to_str(unsigned char x)
 {
   switch(x)
   {
-    DT_BLK     : return "This is block ";    
-    DT_CHR     : return "This is character ";
-    DT_DIR     : return "This is directory ";
-    DT_FIFO    : return "This is fifo ";
-    DT_LNK     : return "This is link ";
-    DT_REG     : return "This is regular ";
-    DT_SOCK    : return "This is socket ";
-    DT_UNKNOWN : return "This is unknown ";
-    default    : return "This is unknown ";
+   case  DT_BLK     : return "This is block ";    
+   case  DT_CHR     : return "This is character ";
+   case  DT_DIR     : return "This is directory ";
+   case  DT_FIFO    : return "This is fifo ";
+   case  DT_LNK     : return "This is link ";
+   case  DT_REG     : return "This is regular ";
+   case  DT_SOCK    : return "This is socket ";
+   case  DT_UNKNOWN : return "This is unknown ";
+   default    : return "This is unknown ";
   }
 }
 
@@ -45,7 +45,7 @@ int main()
       if(pEntry)
       {
         printf("type: %s , name: %s\n",
-            TYPE2STR(pEntry->d_type), pEntry->d_name);
+            type_to_str(pEntry->d_type), pEntry->d_name);
       }
       // move to next fp
       
