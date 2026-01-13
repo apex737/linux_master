@@ -39,14 +39,10 @@ int main()
     struct dirent* pEntry = NULL; 
     // loop internal dir until meet an EOF 
     // Issue: NULL can be an EOF or Unaccessable file
-
     while(pEntry = readdir(dp))
     {
-      if(pEntry)
-      {
-        printf("type: %s , name: %s\n",
-            type_to_str(pEntry->d_type), pEntry->d_name);
-      }
+      printf("type: %s , name: %s\n",
+        TYPE2STR(pEntry->d_type), pEntry->d_name);
       // move to next fp
       
     }
