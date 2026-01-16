@@ -31,8 +31,8 @@ int main()
 
     puts("\n"); 
     puts("Non-Blocking Mode Test");
-
-    int flag = fcntl(fd, F_GETFL); // Get Prev Flag Options
+    // Get Prev Flag Options
+    int flag = fcntl(fd, F_GETFL); 
     if(flag == -1){puts("Get Flag Failed"); return -1;}
     // Set as Non-Blocking Mode
     if(fcntl(fd, F_SETFL, flag | O_NONBLOCK) == -1){puts("Set Flag Failed"); return -1;}    

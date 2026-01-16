@@ -12,13 +12,13 @@ int main(int argc, char** argv)
     printf("usage: %s: filename\n", argv[0]); // 올바른 사용법을 알려주고
     return -1;                                // 비정상 종료  
   }
-  if(stat(argv[1], &statbuf)) // argv[1](PATH)의 정보를 읽어 statbuf에 채웁니다.
+  if(stat(argv[1], &statbuf)) // Fill argv[1] info into the statbuffer
   { 
     printf("stat() fail\n"); // 파일이 없거나 접근 권한이 없으면 실패
     return -1;
   }
 
-  printf("filename %s\n", argv[1]);
+  printf("filename: %s\n", argv[1]);
   printf("size: %ld\n", statbuf.st_size);
   // !man 7 inode 
   if(S_ISDIR(statbuf.st_mode))
