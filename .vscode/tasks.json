@@ -8,6 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "${fileDirname}/../def.c", // 상위 디렉토리의 def.c 추가
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

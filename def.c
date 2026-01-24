@@ -2,7 +2,6 @@
 
 void error_handler(char* msg)
 {
-    fputs(msg, stderr);
-    fputc('\n', stderr);
+    perror(msg);
     exit(1);
 }
