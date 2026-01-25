@@ -12,7 +12,7 @@
 
 #define WSL2_IP    "172.29.11.113"
 void error_handler(char *msg);
-
+int readn(int fd, void* vptr, size_t n);
  /*  APP Protocol
     <operand><payload><operator> */
 typedef struct _op {
