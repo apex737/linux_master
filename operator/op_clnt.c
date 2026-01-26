@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
     while(1)
     {
         printf("Do you want to continue? (y/n) ");
-        scanf(" %c", &c);
+        scanf(" %c", &c);   // 버퍼에 남은 \n을 비우기 위한 White Space 추가
         if(c == 'n' || c == 'N') break;
         printf("Enter opnum: ");
         scanf("%d", &op.cnt);

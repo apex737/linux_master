@@ -7,7 +7,7 @@ void error_handler(char* msg)
 }
 
 // readn by Richard Stevens
-int readn(int fd, void* vptr, size_t n)
+ssize_t readn(int fd, void* vptr, size_t n)
 {
     ssize_t nread;
     size_t nleft = n;
