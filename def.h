@@ -10,14 +10,11 @@
 #include <fcntl.h>
 #include <sys/errno.h>
 
-#define WSL2_IP    "172.29.11.113"
 void error_handler(char *msg);
 ssize_t readn(int fd, void* vptr, size_t n);
- /*  APP Protocol
-    <operand><payload><operator> */
 typedef struct _op {
     int cnt;
-    int payload[10];
+    int payload[10];    // 개선 필요
     char operator;
 } operate;
 

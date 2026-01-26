@@ -22,10 +22,10 @@ int main(int argc, char* argv[])
     }
 
     // 2. serv_addr 구조체로 서버 주소 옵션 설정
-    const char* wsl2_ip = WSL2_IP;
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = inet_addr(wsl2_ip);
+    // 포트명만 일치하면 어떤 IP든 다 받겠음
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     serv_addr.sin_port = htons(atoi(argv[1]));
 
     // 3. bind (전화기(fd)에 옵션 할당)

@@ -1,7 +1,7 @@
 #include "../def.h"
 
-
-
+/*  리처드 스티븐슨의 readn 함수와 App-Protocol을 사용하여 경계가 존재하지 않는
+    TCP의 특성으로 인해 partial read가 일어나는 상황을 방지한다. */
 
 int calc(int cnt, int payload[], char operator)
 {
@@ -27,8 +27,6 @@ int calc(int cnt, int payload[], char operator)
         return -999;
     }
 }
-
-
 
 int main(int argc, char* argv[])
 {
@@ -62,9 +60,10 @@ int main(int argc, char* argv[])
         // 이 클라이언트가 나갈 때까지 반복 서비스
         while(1)
         {
-            // 1. TLV 데이터 수신 (첫 번째 read가 0이면 클라이언트가 접속을 끊은 것)
+            // 1. 헤더 수신 (Tag + Len)
             if (readn(clnt_sock, &op.operator, sizeof(char)) <= 0) break;
             if (readn(clnt_sock, &op.cnt, sizeof(int)) <= 0) break;
+            // 2. Payload (Val) 수신
             if (readn(clnt_sock, op.payload, sizeof(int) * op.cnt) <= 0) break;
             
             // 2. 계산 및 전송

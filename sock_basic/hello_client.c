@@ -8,8 +8,8 @@ int main(int argc, char* argv[])
     char msg[30];
     int str_len;
 
-    if(argc != 3) {
-        printf("USAGE: %s <IP> <PORT>\n", argv[0]);
+    if(argc != 2) {
+        printf("USAGE: %s <PORT>\n", argv[0]);
         exit(1);
     }
 
@@ -21,8 +21,8 @@ int main(int argc, char* argv[])
 
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = inet_addr(argv[1]);
-    serv_addr.sin_port = htons(atoi(argv[2]));
+    serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    serv_addr.sin_port = htons(atoi(argv[1]));
 
     // 2. connect
     if(connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1){
