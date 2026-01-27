@@ -1,10 +1,6 @@
-#include "../def.h"
+#include "../../def.h"
 
-typedef struct {
-    char operator;
-    int opnum;
-    int operand[10];
-} op_t;
+
 
 int main(int argc, char* argv[])
 {
@@ -27,6 +23,7 @@ int main(int argc, char* argv[])
 
     op_t op;
     int res;
+    size_t send_len;
     while(1)
     {
         printf("Operator: ");
@@ -39,10 +36,8 @@ int main(int argc, char* argv[])
             printf("Operator %d: ", i+1);
             scanf("%d", &op.operand[i]);
         }
-        
-        write(sock, &op.operator, sizeof(char));
-        write(sock, &op.opnum, sizeof(int));
-        write(sock, op.operand, sizeof(int)*op.opnum);
+        send_len = sizeof(int) + sizeof(char) + sizeof(int)*op.opnum;
+        write(sock, &op, send_len);
         read(sock, &res, sizeof(res));
         printf("Result: %d\n", res);
     }

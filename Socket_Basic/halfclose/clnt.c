@@ -1,4 +1,4 @@
-#include "../def.h"
+#include "../../def.h"
 #define RX_SZ       30
 /*  1. serv.c 파일을 30Byte 씩 수신
     2. 수신완료하면 응답하고 종료

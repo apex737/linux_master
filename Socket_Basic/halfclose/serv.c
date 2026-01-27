@@ -1,4 +1,4 @@
-#include "../def.h"
+#include "../../def.h"
 #define WR_SZ   30
 
 /*  HALF CLOSE
@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
     }
     // RX, TX 스트림 라인 중 하나만 제거 가능
     shutdown(clnt_sock, SHUT_WR); // No more Tx
-                                  // // TX 버퍼에 남은 데이터 마저 전송
+                                  // TX 버퍼에 남은 데이터 마저 전송
     
     // Payload만 오기 때문에 수동으로 널 추가하기 위한 WR_SZ-1
     if((rbyte = read(clnt_sock, msg, WR_SZ-1)) == -1) error_handler("read() error");

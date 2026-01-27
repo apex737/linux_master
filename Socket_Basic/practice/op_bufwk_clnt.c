@@ -1,4 +1,4 @@
-#include "../def.h"
+#include "../../def.h"
 #define OPSZ        4
 
 int main(int argc, char* argv[])

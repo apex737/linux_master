@@ -1,4 +1,4 @@
-#include "../def.h"
+#include "../../def.h"
 #include <netdb.h> // gethostbyname, gethostbyaddr
 
 // Domain Name => DNS SERVER (Tree 구조) => IP Address

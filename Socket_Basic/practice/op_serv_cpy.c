@@ -1,10 +1,6 @@
 #include "../def.h"
 
-typedef struct {
-    char operator;
-    int opnum;
-    int operand[10];
-} op_t;
+
 
 int calc(op_t* p)
 {
@@ -59,7 +55,7 @@ int main(int argc, char* argv[])
     int clnt_sock, res;
     char msg[64];
     op_t op;
-    
+    size_t header_sz = sizeof(char) + sizeof(int);
     while(1)
     {
         clnt_sock = accept(sock, (struct sockaddr *)&clnt_addr, &sock_len);
@@ -67,10 +63,9 @@ int main(int argc, char* argv[])
         while(1)
         {
             // Tag -> Len -> Value
-            if(readn(clnt_sock, &op.operator, sizeof(char)) <= 0) break;
-            if(readn(clnt_sock, &op.opnum, sizeof(int)) <= 0) break;
-            if(readn(clnt_sock, op.operand, sizeof(int)*op.opnum) <= 0) break;
-
+            if(readn(clnt_sock, &op, header_sz) <= 0) break;
+            printf("Recv opnum: %d\n", op.opnum);
+            if(readn(clnt_sock, &op.operand[0], sizeof(int)*op.opnum) <= 0) break;
             res = calc(&op);
             write(clnt_sock, &res, sizeof(res));
         }

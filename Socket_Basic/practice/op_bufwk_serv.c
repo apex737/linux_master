@@ -1,4 +1,4 @@
-#include "../def.h"
+#include "../../def.h"
 #define OPSZ        4
 
 int calc(char operator, int opnum, int operand[])
