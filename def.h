@@ -6,10 +6,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/socket.h>
 #include <arpa/inet.h>
 #include <fcntl.h>
+#include <time.h>
+#include <sys/socket.h>
 #include <sys/errno.h>
+#include <sys/types.h>
+#include <sys/times.h>
 #define WRSZ    30
 
 void error_handler(char *msg);
