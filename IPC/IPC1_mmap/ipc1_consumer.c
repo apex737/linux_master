@@ -7,7 +7,7 @@ if(addr == MAP_FAILED) error_handler("mmap"); \
 int main(int argc, char* argv[])
 {
     int fd;
-    caddr_t addr;
+    char* addr;
     char fileName[256] = "map.dat";
     if(argc != 2){
         printf("USAGE: %s <filename>\n", argv[0]);
@@ -18,12 +18,11 @@ int main(int argc, char* argv[])
     addr = mmap(NULL, pageSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     CHECK_MMAP(addr);
     close(fd);
-    char c = 'a';
+
     while(1)
     {
         sleep(2);
-        addr[0] = c++;
-        if(c >'z') c = 'a';
+        printf("%c\n", addr[0]);
     }
     return 0;
 }

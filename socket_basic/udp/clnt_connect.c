@@ -1,4 +1,4 @@
-#include "../../def.h"
+#include "../def.h"
 
 int main(int argc, char* argv[])
 {
@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
     mb_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
     mb_addr.sin_family = AF_INET;
     mb_addr.sin_port = htons(atoi(argv[1]));
-    // server가 모르게 클라이언트 단독으로 주소 바인딩
+    // 클라이언트가 주소 바인드한걸 server는 알 수 없음
     if (connect(sock, (struct sockaddr *)&mb_addr, sizeof(mb_addr)) == -1)
         error_handler("connect() error");
 

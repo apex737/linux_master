@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
     if(fd==-1) error_handler("open");
     int pageSize = getpagesize();
     // fd (pageSize 크기의 공유버퍼)로 IPC
-    caddr_t addr = mmap(NULL, pageSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    char* addr = mmap(NULL, pageSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     CHECK_MMAP(addr);
     close(fd);
 
