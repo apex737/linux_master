@@ -5,7 +5,7 @@ int main()
     int pd, n;
     char inmsg[100];
     puts("Client ===========");
-    if((pd == open("./pipeFile", O_RDONLY)) == -1)
+    if((pd = open("./pipeFile", O_RDONLY)) == -1)
         error_handler("open");
     
     char prnt[] = "From Server: ";
