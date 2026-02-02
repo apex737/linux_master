@@ -6,6 +6,8 @@ int main()
     int pd, n;
     char msg[] = "Hello, FIFO";
     puts("Server ===========");
+    // 1. Write Block: 수신자가 올 때까지 open에서 Block
+    // 2. Write NB: 수신자가 없으면 바로 에러 리턴
     if((pd = open("./pipeFile", O_WRONLY)) == -1)
         error_handler("open");
     

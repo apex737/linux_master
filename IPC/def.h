@@ -9,6 +9,12 @@
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <sys/msg.h>
 
 void error_handler(char *msg);
+typedef struct msgbuf {
+    long mtype;
+    char mtext[80];
+} msgBuf;
+
 #endif
