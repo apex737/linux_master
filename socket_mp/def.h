@@ -1,6 +1,6 @@
 #ifndef DEF_H
 #define DEF_H
-// #define _GNU_SOURCE     // 모든 확장기능 사용
+#define _GNU_SOURCE     // 모든 확장기능 사용
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -11,5 +11,6 @@
 #include <errno.h>
 #include <sys/socket.h>
 
+#define BUF_SZ      30
 void error_handler(char *msg);
 #endif
