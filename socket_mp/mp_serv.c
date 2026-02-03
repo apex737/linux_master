@@ -36,8 +36,10 @@ int main(int argc, char* argv[])
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     serv_addr.sin_port = htons(atoi(argv[1]));
+    
     int option = 1; // true
     setsockopt(serv_sock, SOL_SOCKET, SO_REUSEADDR, (void*)&option, optlen);
+
     if(bind(serv_sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1)
         error_handler("bind");
     
@@ -72,8 +74,8 @@ int main(int argc, char* argv[])
                 continue;
                 // error_handler("fork");
             case 0:
-                close(serv_sock); // ???
-                // EOF를 보낼 때까지 계속 블로킹 read
+                close(serv_sock); // 자식은 clnt_sock만 사용
+                                  // EOF를 보낼 때까지 계속 블로킹 read
                 while((len = read(clnt_sock, buf, BUF_SZ)) > 0){
                     write(clnt_sock, buf, len);
                 }
@@ -82,9 +84,7 @@ int main(int argc, char* argv[])
                 puts("client disconnected...");
                 exit(0);
             default:
-                // 부모 프로세스 쪽 연결은 닫아준다.
-                // 왜 이게 문제가 없을까? EOF가 가버리면 클라이언트는 통신 종료라고 
-                // 해석하지 않을까??
+                // 부모는 serv_sock만 사용
                 close(clnt_sock);
                 break;
         }

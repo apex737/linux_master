@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
         exit(1);
     }
 
+    // SIGCHLD 핸들러
     struct sigaction act;
     act.sa_flags = 0;
     sigemptyset(&act.sa_mask);
@@ -40,15 +41,14 @@ int main(int argc, char* argv[])
         error_handler("fork");
     case 0:
         // child is a producer
-        printf("child pid: %d\n", getpid());
         write_routine(sock, msg);
         break;
     default:
         // parent is a consumer
         read_routine(sock, msg);
+        // 이하의 처리가 없으면 자식 프로세스가 남게된다
         kill(pid, SIGKILL);
         usleep(1000*100); // 1ms sleep
-        
         break;
     }
     return 0;
@@ -72,8 +72,8 @@ void write_routine(int sock, char msg[])
         fgets(msg, BUF_SZ, stdin);
         if(strcmp(msg, "q\n") == 0 || strcmp(msg, "Q\n") == 0) 
         {
-            /*  자식 프로세스가 close로 종료되어도 여전히 부모가 소켓을 잡고 있어서
-                서버가 종료 시퀀스에 돌입하지 않는다.
+            /*  자식 프로세스가 close(fd)로 RC-=1을 해도 여전히 부모가 소켓을 잡고 있어서
+                (RC > 0) 서버가 종료 시퀀스에 돌입하지 않는다.
                 반면, shutdown은 서버에게 EOF를 직접 전달하기 때문에
                 close(clnt_sock)에 의해 부모 프로세스도 종료된다.  */
             shutdown(sock, SHUT_WR); 
