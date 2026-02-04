@@ -21,7 +21,7 @@ int main(void)
     {
     case -1: error_handler("fork");
     case 0:
-        close(fd[1]); // close child pipe_o (use default: stdout)
+        close(fd[1]); // close child pipe_o
         write(STDOUT_FILENO, msg, strlen(msg)); // msg 화면 출력
         // pipe_i에서 값 읽기
         if((len = read(fd[0], buf, 256-1)) == -1) error_handler("read"); 
@@ -32,7 +32,7 @@ int main(void)
         close(fd[0]); // close child pipe_i; 
         break;
     default:
-        close(fd[0]); // close parent pipe_i (use default: stdin)
+        close(fd[0]); // close parent pipe_i
         buf[0] = 0;
         // pipe_o에 쓰기
         write(fd[1], "Test msg\n", strlen("Test msg\n"));

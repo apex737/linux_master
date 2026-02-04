@@ -10,6 +10,6 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/socket.h>
-
+#define BUF_SZ      30
 void error_handler(char *msg);
 #endif

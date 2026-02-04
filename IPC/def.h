@@ -10,7 +10,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/msg.h>
-
+#define BUF_SZ      30
 void error_handler(char *msg);
 typedef struct msgbuf {
     long mtype;

@@ -38,6 +38,7 @@ int main(int argc, char* argv[])
     serv_addr.sin_port = htons(atoi(argv[1]));
     
     int option = 1; // true
+    optlen = sizeof(option);
     setsockopt(serv_sock, SOL_SOCKET, SO_REUSEADDR, (void*)&option, optlen);
 
     if(bind(serv_sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1)

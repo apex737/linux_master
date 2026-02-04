@@ -1,5 +1,5 @@
 #include "../def.h"
-#define BUF_SIZE 1024
+#define BUF_SIZE 30
 #define PC_IP "127.0.0.1"
 int main(int argc, char* argv[])
 {
