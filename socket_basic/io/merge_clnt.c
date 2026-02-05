@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
     struct stat sb;
     size_t fileSize = 0;
     int i;
+    // 병합 파일 전체 크기 확인
     for(i = 0; i < 2; i++)
     {
         if(fstat(fileno(fpsrc[i]), &sb) == -1) error_handler("fstat");
@@ -36,9 +37,9 @@ int main(int argc, char* argv[])
     }
 
     // nagle off
-    int option = 1; // TRUE
-    socklen_t optsize = sizeof(option);
-    setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, &option, optsize);
+    // int option = 1; // TRUE
+    // socklen_t optsize = sizeof(option);
+    // setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, &option, optsize);
     if(connect(sock, (struct sockaddr*)&serv_adr, sizeof(serv_adr)) == -1)
         error_handler("connect");
     
@@ -54,6 +55,7 @@ int main(int argc, char* argv[])
     for(i = 0; i < 2; i++)
     {
         // BUF_SZ 만큼씩 반복적으로 buf에 퍼담는다
+        // 파일을 진짜로 버퍼처럼 다루는건 mmap 뿐
         while((len = fread(buf, 1, BUF_SZ, fpsrc[i])) > 0)
         {
             // 헤더 먼저 만들고

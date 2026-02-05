@@ -1,10 +1,9 @@
 #include "../def.h"
 #include <signal.h>
+#include <time.h>
 
 volatile int totalLen = 0;
 struct header rxHeader;
-#include <time.h>
-
 struct timespec start, end;
 double diff;
 
@@ -57,8 +56,6 @@ int main(int argc, char* argv[])
             if((len = readn(clnt_sock, buf, pkt.size)) <= 0) break;
             fwrite(buf, 1, len, fp);
             totalLen -= len; // 전송받은 순수 데이터만큼 차감
-            // printf("진행률: %d / 100\n", 
-            //     (int)((1.0 - (double)totalLen/rxHeader.size)*100));
         }
         
     }

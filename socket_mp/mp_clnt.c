@@ -51,6 +51,7 @@ int main(int argc, char* argv[])
         usleep(1000*100); // 1ms sleep
         break;
     }
+    close(sock);
     return 0;
 }
 
